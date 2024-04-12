@@ -21,25 +21,21 @@ public class Main {
 
         //
         try {
-            if(isCorrect(arabic,num1) && (isCorrect(arabic,num2))){
+            if (isCorrect(arabic, num1) && (isCorrect(arabic, num2))) {
                 System.out.println(operation(num1, num2, op));
-            }
-            else if(isCorrect(roman,num1) && (isCorrect(roman,num2))){
+            } else if (isCorrect(roman, num1) && (isCorrect(roman, num2))) {
                 num1 = romanToArabic(num1);
                 num2 = romanToArabic(num2);
-                int arabicInt  = operation(num1, num2, op);
+                int arabicInt = operation(num1, num2, op);
                 if (arabicInt >= 0) {
                     System.out.println(arabicToRoman(arabicInt));
-                }
-                else {
+                } else {
                     throw new Exception();
                 }
-            }
-            else {
+            } else {
                 throw new Exception();
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
         }
     }
 
@@ -63,43 +59,54 @@ public class Main {
     }
 
 
-    private static String romanToArabic (String romanLetter) {
+    private static String romanToArabic(String romanLetter) {
         switch (romanLetter) {
-            case  "I" :return "1";
-            case "II" :return "2";
-            case "III" :return "3";
-            case "IV" :return "4";
-            case "V" :return "5";
-            case "VI" :return "6";
-            case "VII" :return "7";
-            case "VIII" :return "8";
-            case "IX" :return "9";
-            case "X" :return "10";
-            default: return "";
+            case "I":
+                return "1";
+            case "II":
+                return "2";
+            case "III":
+                return "3";
+            case "IV":
+                return "4";
+            case "V":
+                return "5";
+            case "VI":
+                return "6";
+            case "VII":
+                return "7";
+            case "VIII":
+                return "8";
+            case "IX":
+                return "9";
+            case "X":
+                return "10";
+            default:
+                return "";
         }
     }
 
-    public static String arabicToRoman (int arabicInt) {
+    public static String arabicToRoman(int arabicInt) {
         String[] romanArray = {"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
                 "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI", "XXXVII", "XXXVIII", "XXXIX", "XL",
                 "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
                 "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
                 "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
-                "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
+                "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC", "XCI", "XCII","XCIII","XCIV","XCV","XCVI","XCII","XCVIII","XCIX","C"
         };
         String romanResult = romanArray[arabicInt];
         return romanResult;
 
 
     }
+
     public static boolean isCorrect(String[] arr, String toCheckValue) {
         for (String element : arr) {
             if (element.equals(toCheckValue)) {
                 return true;
             }
         }
-            return false;
-
+        return false;
 
 
     }
