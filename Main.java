@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Main {
     static String[] roman = new String[]{"X", "IX", "VIII", "VII", "VI", "V", "IV", "III", "II", "I"};
@@ -12,6 +13,14 @@ public class Main {
         System.out.println("Введите ваш пример :");
         Scanner scannerKeyIn = new Scanner(System.in);
         String keyOut = scannerKeyIn.next();
+        // проверка на корректность с помощью регулярного выражения
+        try {
+            if(!Pattern.matches("(\\d+[\\-+/*]+\\d)|([XVI]{1,3}+[\\-+/*]+[XVI]{1,3})",keyOut)) {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         //Здесь начинается парсинг и передача его в массивы
         String[] operand = keyOut.split("\\W"); //Разделяет строку на слагаемые и записывает их в массив
         String[] operator = keyOut.split("\\w"); //Выделяет знак действия и записывает его в массив
@@ -92,7 +101,7 @@ public class Main {
                 "XLI", "XLII", "XLIII", "XLIV", "XLV", "XLVI", "XLVII", "XLVIII", "XLIX", "L", "LI", "LII", "LIII", "LIV", "LV", "LVI", "LVII", "LVIII", "LIX", "LX",
                 "LXI", "LXII", "LXIII", "LXIV", "LXV", "LXVI", "LXVII", "LXVIII", "LXIX", "LXX",
                 "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
-                "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC", "XCI", "XCII","XCIII","XCIV","XCV","XCVI","XCII","XCVIII","XCIX","C"
+                "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC", "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCII", "XCVIII", "XCIX", "C"
         };
         String romanResult = romanArray[arabicInt];
         return romanResult;
