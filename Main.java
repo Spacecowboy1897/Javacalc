@@ -1,12 +1,10 @@
-import java.util.*;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Main {
     static String[] roman = new String[]{"X", "IX", "VIII", "VII", "VI", "V", "IV", "III", "II", "I"};
     static String[] arabic = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
-    static String result = "";
-    static String letter1 = "";
-    static String letter2 = "";
+
 
     public static void main(String[] args) {
         // write your code here
@@ -15,7 +13,7 @@ public class Main {
         String keyOut = scannerKeyIn.next();
         // проверка на корректность с помощью регулярного выражения
         try {
-            if(!Pattern.matches("(\\d+[\\-+/*]+\\d)|([XVI]{1,3}+[\\-+/*]+[XVI]{1,3})",keyOut)) {
+            if (!Pattern.matches("(\\d+[\\-+/*]+\\d)|([XVI]{1,3}+[\\-+/*]+[XVI]{1,3})", keyOut)) {
                 throw new Exception();
             }
         } catch (Exception e) {
@@ -30,22 +28,32 @@ public class Main {
 
         //
         try {
-            if (isCorrect(arabic, num1) && (isCorrect(arabic, num2))) {
+            // Добавил проверку на вводимые числа в диапазоне 0-10
+            if (isCorrect(arabic, num1) && (isCorrect(arabic, num2)) && (Integer.parseInt(num1) >= 0 && Integer.parseInt(num1) >= 0) && (Integer.parseInt(num1) <= 10 && Integer.parseInt(num1) <= 10)) {
                 System.out.println(operation(num1, num2, op));
             } else if (isCorrect(roman, num1) && (isCorrect(roman, num2))) {
                 num1 = romanToArabic(num1);
                 num2 = romanToArabic(num2);
-                int arabicInt = operation(num1, num2, op);
-                if (arabicInt >= 0) {
-                    System.out.println(arabicToRoman(arabicInt));
-                } else {
+                //проверка если римское число больше X и меньше 0
+                if ((Integer.parseInt(num1) > 10 || Integer.parseInt(num1) < 0) || (Integer.parseInt(num2) > 10 || Integer.parseInt(num2) < 0)) {
                     throw new Exception();
                 }
+                int arabicInt = operation(num1, num2, op);
+                if (arabicInt < 0) { // проверка на результат для римских вычислений > 0  и <10
+                    throw new RuntimeException();
+                }
+
+
+                System.out.println(arabicToRoman(arabicInt));
+
+
             } else {
                 throw new Exception();
             }
         } catch (Exception e) {
+            throw new RuntimeException();
         }
+
     }
 
 
